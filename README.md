@@ -1,2 +1,2 @@
-# MNIST---PyTorch-C-
+# MNIST-PyTorch-C++
 MNIST Classifier with PyTorch C++ API
