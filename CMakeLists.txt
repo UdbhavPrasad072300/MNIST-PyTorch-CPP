@@ -8,13 +8,13 @@ project("MNIST_PyTorch_CPP")
 find_package(Torch REQUIRED)
 
 # Add source to this project's executable.
-add_executable (MNIST_PyTorch_CPP "main.cpp")
-target_link_libraries(MNIST_PyTorch_CPP "${TORCH_LIBRARIES}")
-set_property(TARGET MNIST_PyTorch_CPP PROPERTY CXX_STANDARD 14)
+add_executable (${PROJECT_NAME} "main.cpp")
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 
 if (MSVC)
   file(GLOB TORCH_DLLS "${TORCH_INSTALL_PREFIX}/lib/*.dll")
-  add_custom_command(TARGET MNIST_PyTorch_CPP
+  add_custom_command(TARGET ${PROJECT_NAME}
                      POST_BUILD
                      COMMAND ${CMAKE_COMMAND} -E copy_if_different
                      ${TORCH_DLLS}
