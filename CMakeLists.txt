@@ -1,24 +1,11 @@
-# CMakeList.txt : CMake project for cpppractice, include source and define
-# project specific logic here.
-#
 cmake_minimum_required (VERSION 3.8)
 
 project("MNIST_PyTorch_CPP")
 
+set(CMAKE_PREFIX_PATH /home/udbhavprasad/MNIST-PyTorch-CPP/libtorch)
 find_package(Torch REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
-# Add source to this project's executable.
 add_executable (${PROJECT_NAME} "main.cpp")
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
-
-if (MSVC)
-  file(GLOB TORCH_DLLS "${TORCH_INSTALL_PREFIX}/lib/*.dll")
-  add_custom_command(TARGET ${PROJECT_NAME}
-                     POST_BUILD
-                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                     ${TORCH_DLLS}
-                     $<TARGET_FILE_DIR:MNIST_PyTorch_CPP>)
-endif (MSVC)
-
-# TODO: Add tests and install targets if needed.
