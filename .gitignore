@@ -58,3 +58,7 @@ cmake-build-debug/
 # Clion
 
 .idea/
+
+# Data
+
+mnist/
