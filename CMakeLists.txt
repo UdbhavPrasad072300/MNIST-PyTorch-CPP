@@ -12,3 +12,10 @@ add_executable (${PROJECT_NAME} "main.cpp"
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_range_for)
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
+
+message(STATUS "Torch library status:")
+message(STATUS "    version: ${TORCH_VERSION}")
+message(STATUS "    libraries: ${TORCH_LIBS}")
+message(STATUS "    include path: ${TORCH_INCLUDE_DIRS}")
+message(STATUS "    torch lib : ${TORCH_LIBRARIES} ")
+

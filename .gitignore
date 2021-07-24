@@ -61,4 +61,4 @@ cmake-build-debug/
 
 # Data
 
-mnist/
+/data/mnist/
