@@ -3,6 +3,7 @@
 
 
 // Hyperparameters
+
 const int64_t INPUT_SIZE = 784;
 const int64_t NUM_CLASSES = 10;
 const int64_t BATCH_SIZE = 1000;
@@ -12,6 +13,7 @@ const double LR = 0.001;
 const std::string MNIST_data_path = "./data/mnist/";
 
 // Model
+
 struct Net : torch::nn::Module {
 	Net(int64_t N, int64_t M) {
 		W = register_parameter("W", torch::randn({ N, M }));
