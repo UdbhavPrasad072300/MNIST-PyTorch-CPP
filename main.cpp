@@ -25,7 +25,6 @@ struct Net : torch::nn::Module {
 	torch::Tensor W, b;
 };
 
-
 int main() {
 	std::cout << "MNIST Classifier\n" << std::endl;
 	// DEVICE
