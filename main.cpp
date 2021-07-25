@@ -50,6 +50,10 @@ int main() {
 
     std::cout << model << std::endl;
 
+    // Optimizer
+
+    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(LR));
+
     // Test Run
 
 	torch::Tensor tensor = torch::rand({ 2, 3 }, torch::kCUDA);
