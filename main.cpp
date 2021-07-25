@@ -35,8 +35,11 @@ int main() {
             .map(torch::data::transforms::Normalize<>(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
-    std::cout << "Train Dataset is of size: " << train_dataset.size().value() << std::endl;
-    std::cout << "Test Dataset is of size: " << test_dataset.size().value() << std::endl;
+    train_size = train_dataset.size().value();
+    test_size = test_dataset.size().value();
+
+    std::cout << "Train Dataset is of size: " << train_size << std::endl;
+    std::cout << "Test Dataset is of size: " << test_size << std::endl;
 
     // Dataloader
 
@@ -66,6 +69,8 @@ int main() {
 
             auto loss = torch::nn::functional::cross_entropy(out, target);
 
+            auto prediction = output.argmax(1);
+
             optimizer.zero_grad();
             loss.backward();
             optimizer.step();
@@ -77,6 +82,34 @@ int main() {
     }
 
     // Test Run
+
+    model.eval();
+    float test_loss = 0
+    size_t num_correct = 0;
+
+    for (auto& batch : *test_loader) {
+        auto data = batch.data.view({ BATCH_SIZE, -1 }).to(DEVICE);
+        auto target = batch.target.to(DEVICE);
+
+        auto out = model.forward(data);
+
+        auto loss = torch::nn::functional::cross_entropy(out, target);
+
+        test_loss += loss.item<double>() * data.size(0);
+        
+        auto prediction = output.argmax(1);
+
+        num_correct += prediction.eq(target).sum().item<int64_t>();
+    }
+
+    auto test_accuracy = static_cast<double>(num_correct) / test_sizes;
+    auto test_loss = test_loss / test_size;
+
+    std::cout << "Test Accuracy: " << test_accuracy << std::endl;
+    std::cout << "Test Loss" << test_loss << std::endl;
+
+
+    // Example
 
 	torch::Tensor tensor = torch::rand({ 2, 3 }, torch::kCUDA);
 	std::cout << tensor << std::endl;
