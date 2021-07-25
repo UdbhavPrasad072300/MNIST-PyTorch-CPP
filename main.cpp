@@ -54,6 +54,28 @@ int main() {
 
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(LR));
 
+    // Training
+
+    for (size_t epoch=0; epoch < NUM_EPOCHS; epoch++) {
+
+        for (auto& batch : *train_loader) {
+            auto data = batch.data.view({BATCH_SIZE, -1}).to(DEVICE);
+            auto target = batch.target.to(DEVICE);
+
+            auto out = model.forward(data);
+
+            auto loss = torch::nn::functional::cross_entropy(out, target);
+
+            optimizer.zero_grad();
+            loss.backward();
+            optimizer.step();
+
+            // std::cout << data << std::endl;
+        }
+
+        std::cout << "Epoch " << epoch << std::endl;
+    }
+
     // Test Run
 
 	torch::Tensor tensor = torch::rand({ 2, 3 }, torch::kCUDA);
