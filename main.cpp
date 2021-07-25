@@ -132,5 +132,5 @@ int main() {
 
     // Finishing Flag
 
-	std::cout << "Program Finished" << std::endl;
+    std::cout << "Program Finished" << std::endl;
 }
