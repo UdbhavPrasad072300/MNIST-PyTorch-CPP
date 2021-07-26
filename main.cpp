@@ -17,13 +17,13 @@ const double LR = 0.0001;
 const std::string MNIST_data_path = "/home/udbhavprasad/MNIST-PyTorch-CPP/mnist";
 
 int main() {
-	std::cout << "MNIST Classifier\n" << std::endl;
+    std::cout << "MNIST Classifier\n" << std::endl;
 
-	// DEVICE
+    // DEVICE
 
-	auto cuda_available = torch::cuda::is_available();
-	torch::Device DEVICE(cuda_available ? torch::kCUDA : torch::kCPU);
-	std::cout << (cuda_available ? "GPU being Used" : "CPU being Used") << '\n' << std::endl;
+    auto cuda_available = torch::cuda::is_available();
+    torch::Device DEVICE(cuda_available ? torch::kCUDA : torch::kCPU);
+    std::cout << (cuda_available ? "GPU being Used" : "CPU being Used") << '\n' << std::endl;
 
 	// Dataset
 
